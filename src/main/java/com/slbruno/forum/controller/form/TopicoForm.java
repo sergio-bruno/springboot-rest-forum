@@ -1,11 +1,14 @@
 package com.slbruno.forum.controller.form;
 
+import javax.validation.constraints.NotEmpty;
+
 import com.slbruno.forum.modelo.Curso;
 import com.slbruno.forum.modelo.Topico;
 import com.slbruno.forum.repository.CursoRepository;
 
 public class TopicoForm {
 
+	@NotEmpty
 	private String titulo;
 	private String mensagem;
 	private String nomeCurso;
