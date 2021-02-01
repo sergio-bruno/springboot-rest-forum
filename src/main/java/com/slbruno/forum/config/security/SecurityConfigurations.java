@@ -21,6 +21,9 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private AutenticacaoService autenticacaoService;
 	
+	@Autowired
+	private TokenService tokenService;
+	
 	/*
 	 * Para a classe AutenticacaoController.java injetar corretamente o 
 	 * 
@@ -49,7 +52,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 		.anyRequest().authenticated()
 		.and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		.and().addFilterBefore(new AutenticacaoViaTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+		.and().addFilterBefore(new AutenticacaoViaTokenFilter(tokenService), UsernamePasswordAuthenticationFilter.class);
 		
 		/* só serve para login tradicional com formulário para sessão
 		 * .and().formLogin();
