@@ -36,6 +36,12 @@
 			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
 
+		<!-- Security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
 		<!-- H2 -->
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -72,7 +78,7 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>6.1.5.Final</version>
 		</dependency>
-
+ 
 	</dependencies>
 
 	<build>
