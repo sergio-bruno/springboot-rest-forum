@@ -53,7 +53,6 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers(HttpMethod.GET, "/topicos").permitAll()
 		.antMatchers(HttpMethod.GET, "/topicos/*").permitAll()
-		.antMatchers(HttpMethod.GET, "/actuator").permitAll()
 		.antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
 		.antMatchers(HttpMethod.POST, "/auth").permitAll()
 		.anyRequest().authenticated()
@@ -65,6 +64,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	// recusros estáticos: js, css, imagens
 	@Override
 	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**" );
 	}
 	
 	// Só para fins didáticos, gerar a senha criptografada e colocar no data.sql
