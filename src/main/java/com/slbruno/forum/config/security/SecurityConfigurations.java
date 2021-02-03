@@ -55,6 +55,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.GET, "/topicos/*").permitAll()
 		.antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
 		.antMatchers(HttpMethod.POST, "/auth").permitAll()
+		.antMatchers(HttpMethod.DELETE, "/topicos/*").hasRole("MODERADOR")
 		.anyRequest().authenticated()
 		.and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -67,7 +68,10 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**" );
 	}
 	
-	// Só para fins didáticos, gerar a senha criptografada e colocar no data.sql
+	/*
+	 * Só para fins didáticos, gerar a senha criptografada e colocar no data.sql
+	 * Roda Run As - Java Application 
+	 */
 	/*
 	public static void main(String[] args) {
 		System.out.print(new BCryptPasswordEncoder().encode("123456"));
