@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.slbruno.forum.controller.docs.TopicosControllerDocs;
 import com.slbruno.forum.controller.dto.DetalhesDoTopicoDto;
 import com.slbruno.forum.controller.dto.TopicoDto;
 import com.slbruno.forum.controller.form.AtualizacaoTopicoForm;
@@ -35,7 +36,7 @@ import com.slbruno.forum.repository.TopicoRepository;
 
 @RestController
 @RequestMapping("/topicos")
-public class TopicosController {
+public class TopicosController implements TopicosControllerDocs {
 
 	@Autowired
 	private TopicoRepository topicoRepository; 
