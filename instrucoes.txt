@@ -1,0 +1,22 @@
+1) criar o Dockerfile
+
+FROM adoptopenjdk/openjdk11:alpine 
+RUN addgroup -S spring && adduser -S spring -G spring 
+USER spring:spring 
+ARG JAR_FILE=target/*.jar 
+COPY ${JAR_FILE} app.jar 
+ENTRYPOINT ["java", "-jar", "/app.jar"]
+
+Obs.: para usar o java 8
+FROM openjdk:8-jdk-alpine
+
+2) No diretório do app criar a imagem no docker
+
+$ docker build -t slbruno/forum .
+
+(colocar o PONTO no final)
+
+
+3) Rodar o container com a imagem criada
+
+docker run -p 8080:8080 -e SPRING_PROFILES_ACTIVE='prod' -e FORUM_DATABASE_URL='jdbc:h2:mem:alura-forum' -e FORUM_DATABASE_USERNAME='sa' -e FORUM_DATABASE_PASSWORD='' -e FORUM_JWT_SECRET='SLBruno123' slbruno/forum
