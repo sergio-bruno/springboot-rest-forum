@@ -20,3 +20,43 @@ $ docker build -t slbruno/forum .
 3) Rodar o container com a imagem criada
 
 docker run -p 8080:8080 -e SPRING_PROFILES_ACTIVE='prod' -e FORUM_DATABASE_URL='jdbc:h2:mem:alura-forum' -e FORUM_DATABASE_USERNAME='sa' -e FORUM_DATABASE_PASSWORD='' -e FORUM_JWT_SECRET='SLBruno123' slbruno/forum
+
+4) Para deploy de aplicação via linha de comando usar o Heroku-cli, no terminal do github da aplicação (Git Bash Here) os comandos são:
+
+	heroku login
+	heroku container:login
+	heroku create springboot-rest-forum
+	heroku git:remote -a springboot-rest-forum
+	
+	Obs.: 
+		4.1) No Dockerfile no ENTRYPOINT precisa colocar uma configuração de memória, pis a conta é limitada por ser gratuita o comando
+		"-Xmx512m" (para limitar a 512mb de memória)
+		"-Dserver.port=${PORT}"
+		4.2) No application-prod.properties adicionar a linha
+			server.port=${PORT}
+		4.3) As configurações do item 3 serão colocadas no Heroku
+			4.3.1) avessa no navegador o dashboard do Heroku 
+				https://dashboard.heroku.com/apps/springboot-rest-forum
+			4.3.2) Entra na aba Settings na opçãp Config Vars e, começa a criar as variáveis (as variáves estão em application-prod.properties)
+				PORT = 8080
+				SPRING_PROFILES_ACTIVE = prod
+				FORUM_DATABASE_URL = jdbc:h2:mem:slbruno-forum
+				FORUM_DATABASE_USERNAME = sa
+				FORUM_DATABASE_PASSWORD = 
+				FORUM_JWT_SECRET = SLBruno123#!5433233	
+				
+	heroku container:push web	
+	heroku container:release web	
+	heroku open
+	
+5) para executar https://springboot-rest-forum.herokuapp.com/topicos	
+		
+	caso dê erros digitar no terminal:
+		heroku logs --tail 
+			
+			
+6) Caso precise fazer alterações no sistema é preciso digitar o comando: 		
+			
+	heroku container:push web	
+	heroku container:release web	
+	heroku open
